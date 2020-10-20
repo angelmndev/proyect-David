@@ -1,0 +1,21 @@
+.header__navbar{
+    display: flex;
+    justify-content: space-between;
+  
+}
+.title__navbar{
+
+}
+
+.avatar__navbar{
+}
+
+.boton_navbar_r{
+    border: none;
+    background:none;
+}
+.site-layout-content {
+    background: #fff;
+    padding: 24px;
+    /* min-height: 280px; */
+  }

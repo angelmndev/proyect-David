@@ -1,0 +1,26 @@
+
+ .linea__before{
+    width: 80%;
+    height: .3em;
+    display: block;
+    background-color: #fff;
+    margin: 0  0 6em 0em;
+}
+
+
+.linea__after{
+    width: 20%;
+    height: .3em;
+    display: block;
+    background-color: #fff;
+    margin: 0  0 6em 0em;
+}
+
+@media screen and (max-width:1000px){
+    .wallpaper{
+        display: none;
+    }
+   
+ 
+
+}
