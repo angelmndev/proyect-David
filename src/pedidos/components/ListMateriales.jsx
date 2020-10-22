@@ -87,7 +87,7 @@ const ListMateriales = ({ fk_area, fk_sede, presupuesto, idUsuario }) => {
                                     <Space key={field.key} style={{ display: 'flex', margin: 8 }} align="start">
                                         {/* ------search -----*/}
                                         <Form.Item
-
+                                            
                                             {...field}
                                             label="COD.MATERIAL"
                                             labelCol={24}
@@ -102,7 +102,7 @@ const ListMateriales = ({ fk_area, fk_sede, presupuesto, idUsuario }) => {
                                             <Select
                                                 onChange={cambiarMaterial}
                                                 showSearch
-                                                style={{ width: '210px' }}
+                                                style={{ width: '250px' }}
                                                 optionFilterProp="children"
                                                 filterOption={(input, option) =>
                                                     option.children.toString().toLowerCase().indexOf(input.toLowerCase()) >= 0
@@ -111,12 +111,11 @@ const ListMateriales = ({ fk_area, fk_sede, presupuesto, idUsuario }) => {
                                                 {
                                                     productos.map((item) =>
                                                         (
-                                                            <Option key={item.idProductoAlmacen} value={item.idProductoAlmacen}>
-                                                                {item.skuProducto} - STOCK:{item.cantidadProductoAlmacen}
+                                                            <Option key={item.idProducto} value={item.idProducto}>
+                                                                {item.nombreProducto} - {item.descripcion}
                                                             </Option>
                                                         ))
                                                 }
-
                                             </Select>
 
                                             {/* input */}
@@ -128,12 +127,12 @@ const ListMateriales = ({ fk_area, fk_sede, presupuesto, idUsuario }) => {
                                         <Form.Item
                                             {...field}
                                             label="CANTIDAD"
-
+                                            
                                             name={[field.name, 'cantidadProducto']}
                                             fieldKey={[field.fieldKey, 'cantidadProducto']}
                                             rules={[{ required: true, message: 'cantidad' }]}
                                         >
-                                            <InputNumber placeholder="cantidad producto" />
+                                            <InputNumber style={{ width: '75px' }} placeholder="cantidad producto" />
                                         </Form.Item>
 
 

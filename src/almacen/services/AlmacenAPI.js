@@ -173,18 +173,13 @@ export const listarProductosSedesAlmacen = async (filtro) => {
     }
 
     if (todos) {
-        const response = await fetch(`${API_URL}/filtroProductoSedeAlmacen`, config)
+        const response = await fetch(`${API_URL}/filtroProductoSedeAlmacen/${sede}`, config)
         const inventario = await response.json();
         return inventario;
 
     } else {
-        const response = await fetch(`${API_URL}/filtroProductoSedeAlmacen/sede/${sede}/almacen/${almacen}`, config)
+        const response = await fetch(`${API_URL}/filtroProductoSedeAlmacen/${sede}/${almacen}`, config)
         const inventario = await response.json();
         return inventario;
     }
-
-
-
-
-
 }
