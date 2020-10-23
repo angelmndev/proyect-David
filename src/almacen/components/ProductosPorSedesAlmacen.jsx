@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { Select, Card, Col, Row, Button, Space } from 'antd';
+import { Select, Card, Col, Row, Button, Space, Spin } from 'antd';
 
 //APIS
 import { getSedes } from '../../sedes/services/sedesApi'
 import { obtenerAlmacenPorSede, listarProductosSedesAlmacen } from '../services/AlmacenAPI'
 import ListaProductosFiltradosPorSedeAlmacen from './ListaProductosFiltradosPorSedeAlmacen'
+
+
 const ProductosPorSedesAlmacen = () => {
+    // eslint-disable-next-line
     const { Option } = Select;
-
-
 
     const [sedes, setSedes] = useState([])
     const [almacenes, setAlmacenes] = useState([])
+    const [loading, setLoading] = useState(false)
+    const [listaProductos, setProductos] = useState([])
+
 
     //state de mi filtro personalizado
     const [sedeyAlmacenEscogido, setSedeyAlmacenEscogido] = useState({
@@ -57,15 +61,15 @@ const ProductosPorSedesAlmacen = () => {
     }
 
 
-    const filtrarProductos = async () => {
-        const respuestadeApi = await listarProductosSedesAlmacen(sedeyAlmacenEscogido)
+    const filtrarProductos = () => {
+        setLoading(true)
+        setTimeout(async () => {
+            setLoading(false)
+            const { data } = await listarProductosSedesAlmacen(sedeyAlmacenEscogido)
+            setProductos(data)
 
+        }, 1000);
 
-        /**
-         * estos datos obtenidos de la api tendra q trabajarlo el frontend
-         * y mostrarlos en la tabla.
-         */
-        console.log(respuestadeApi);
     }
     return (
         <>
@@ -77,7 +81,9 @@ const ProductosPorSedesAlmacen = () => {
                             <Select
                                 placeholder="ESCOGE LA SEDE"
                                 style={{ width: 200 }}
-                                onChange={handleChangeSede}>
+                                onChange={handleChangeSede}
+
+                            >
 
                                 {
                                     sedes.map((item) => (
@@ -92,7 +98,9 @@ const ProductosPorSedesAlmacen = () => {
                             <Select
                                 placeholder="ESCOGE EL ALMACEN"
                                 style={{ width: 300 }}
-                                onChange={handleChangeAlmacen}>
+                                onChange={handleChangeAlmacen}
+
+                            >
                                 <Option value="TODOS">TODOS</Option>
                                 {
 
@@ -110,9 +118,13 @@ const ProductosPorSedesAlmacen = () => {
                 </Row>
 
             </Card>
-            <Card style={{ marginTop: '1em' }}>
+            <Card style={{ marginTop: '1em', textAlign: 'center' }}>
                 {/* mis productos estaran listados aqui dentro de este componente */}
-                <ListaProductosFiltradosPorSedeAlmacen />
+                {
+                    loading ?
+                        <Spin size="small" tip="Cargando materiales.." />
+                        : <ListaProductosFiltradosPorSedeAlmacen listaProductos={listaProductos} />
+                }
             </Card>
         </>
     )

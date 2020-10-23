@@ -5,6 +5,7 @@ import ListProductos from '../components/ListProductos';
 import { listarProductosAPI, deleteProductoAPI } from '../services/materialesApi'
 import { openNotificationDelete } from '../components/Notificaciones'
 import ModalProductos from '../components/ModalProductos'
+import RegistroMasivo from '../components/RegistroMasivo'
 
 const MaterialesContainer = () => {
     const { TabPane } = Tabs;
@@ -60,6 +61,9 @@ const MaterialesContainer = () => {
                 </TabPane>
                 <TabPane tab="Productos registrados" key="2">
                     <ListProductos productos={productos} editarProducto={editarProducto} deleteProducto={deleteProducto} />
+                </TabPane>
+                <TabPane tab="Registro de productos masivos" key="3">
+                    <RegistroMasivo />
                 </TabPane>
             </Tabs>
             {

@@ -76,3 +76,17 @@ export const listarProductosAreasAPI = async (idArea) => {
     const productos = await response.json();
     return productos;
 }
+
+export const registrarProductosMasivosAPI = async (materiales) => {
+
+    const config = {
+
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(materiales)
+    };
+
+    const responseApi = await fetch(`${API_URL}/subidaMasiva`, config);
+    const response = await responseApi.json();
+    return response;
+}

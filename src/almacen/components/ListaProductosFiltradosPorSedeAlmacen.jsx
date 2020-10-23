@@ -1,37 +1,61 @@
 import React from 'react'
-import { Table } from 'antd'
-const ListaProductosFiltradosPorSedeAlmacen = () => {
+import { Table, Tag } from 'antd'
+const ListaProductosFiltradosPorSedeAlmacen = ({ listaProductos }) => {
 
-    const dataSource = [
-        {
-            key: '1',
-            name: 'Mike',
-            age: 32,
-            address: '10 Downing Street',
-        },
-        {
-            key: '2',
-            name: 'John',
-            age: 42,
-            address: '10 Downing Street',
-        },
-    ];
+    const dataSource = [];
+
+    // eslint-disable-next-line
+    listaProductos.map((item, index) => {
+
+        dataSource.push({
+            orden: index + 1,
+            nombreAlmacen: item.nombreInventario,
+            nombreMaterial: item.nombreProducto,
+            cantidadMaterial: item.cantidadProductoAlmacen,
+            costoUnidad: item.costoProductoAlmacen
+        })
+    })
 
     const columns = [
         {
-            title: 'Name',
-            dataIndex: 'name',
-            key: 'name',
+            title: 'Orden',
+            dataIndex: 'orden',
+            key: 'orden',
         },
         {
-            title: 'Age',
-            dataIndex: 'age',
-            key: 'age',
+            title: 'Almacen',
+            dataIndex: 'nombreAlmacen',
+            key: 'nombreAlmacen',
+            render: (nombreAlmacen) => {
+                switch (nombreAlmacen) {
+                    case 'ALMACEN  GENERAL':
+                        return <Tag color="purple">{nombreAlmacen}</Tag>
+
+                    case 'ALMACEN MANTENIMIENTO':
+                        return <Tag Tag color="green" > {nombreAlmacen}</Tag>
+                    default:
+                        break;
+                }
+
+
+            }
+
         },
         {
-            title: 'Address',
-            dataIndex: 'address',
-            key: 'address',
+            title: 'Material',
+            dataIndex: 'nombreMaterial',
+            key: 'nombreMaterial',
+        },
+        {
+            title: 'Cantidad total',
+            dataIndex: 'cantidadMaterial',
+            key: 'cantidadMaterial',
+        },
+        {
+            title: 'Costo unitario',
+            dataIndex: 'costoUnidad',
+            key: 'costoUnidad',
+            render: (costo) => `S/ ${costo}`
         },
     ];
 
