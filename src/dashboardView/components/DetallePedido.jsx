@@ -61,7 +61,9 @@ const DetallePedido = ({ idPedido, setViewDetalle }) => {
         data.push({
             orden: index + 1,
             producto: pedido.nombreProducto,
+            sku: pedido.skuProducto,
             cantidad: pedido.cantidadPedido,
+            unidad: pedido.unidad,
             precio: pedido.precioReferencialProducto,
             total: pedido.total,
             area: pedido.nombreArea,
@@ -90,7 +92,12 @@ const DetallePedido = ({ idPedido, setViewDetalle }) => {
             key: 'area',
         },
         {
-            title: 'producto',
+            title: 'Codigo material',
+            dataIndex: 'sku',
+            key: 'sku',
+        },
+        {
+            title: 'Material',
             dataIndex: 'producto',
             key: 'producto',
         },
@@ -100,16 +107,21 @@ const DetallePedido = ({ idPedido, setViewDetalle }) => {
             key: 'cantidad',
         },
         {
+            title: 'unidad',
+            dataIndex: 'unidad',
+            key: 'unidad',
+        },
+        {
             title: 'precio',
             dataIndex: 'precio',
             key: 'precio',
-            render: (precio) => (<p>$ {precio}</p>)
+            render: (precio) => (<p>S/ {precio}</p>)
         },
         {
             title: 'total',
             dataIndex: 'total',
             key: 'total',
-            render: (total) => (<p>$ {total}</p>)
+            render: (total) => (<p>S/ {total}</p>)
         },
         {
             title: 'Action',
@@ -151,7 +163,7 @@ const DetallePedido = ({ idPedido, setViewDetalle }) => {
                 dataSource={data}
                 columns={columns}
                 scroll={{ x: 320 }}
-
+                size="small"
                 summary={pageData => {
                     let montoFinal = 0;
 
@@ -170,8 +182,10 @@ const DetallePedido = ({ idPedido, setViewDetalle }) => {
                                 <Table.Summary.Cell></Table.Summary.Cell>
                                 <Table.Summary.Cell></Table.Summary.Cell>
                                 <Table.Summary.Cell></Table.Summary.Cell>
+                                <Table.Summary.Cell></Table.Summary.Cell>
+                                <Table.Summary.Cell></Table.Summary.Cell>
                                 <Table.Summary.Cell>
-                                    <Text type="danger">$ {montoFinal}</Text>
+                                    <Text type="danger">S/ {montoFinal}</Text>
                                 </Table.Summary.Cell>
                                 <Table.Summary.Cell></Table.Summary.Cell>
                             </Table.Summary.Row>

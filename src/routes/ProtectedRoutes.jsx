@@ -4,7 +4,9 @@ import { Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import DashboardLogistica from '../dashboard/components/Dashboard'
-import PanelRequerimientos from '../pedidos/containers/PanelRequerimientos'
+// import PanelRequerimientos from '../pedidos/containers/PanelRequerimientos'
+import PanelRequerimientos from '../pedidos/containers/PanelRequerimientosv2'
+
 import DashboardView from '../dashboardView/components/DashboardView'
 
 const ProtectedRoutes = ({ auth, rol, component: Component, ...rest }) => {

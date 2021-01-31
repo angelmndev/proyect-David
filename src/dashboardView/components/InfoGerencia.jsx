@@ -8,6 +8,7 @@ import ListaPedidos from '../components/ListaPedidos'
 import ListaCentroCostos from '../components/ListaCentroCostos'
 import { ListPedidosAPI } from '../../pedidosUsuarios/services/pedidosApi'
 import { ListCecos } from '../../ceco/services/cecosApi'
+import ProductosPorSedesAlmacen from '../../almacen/components/ProductosPorSedesAlmacen';
 
 const { Paragraph } = Typography;
 const { Content } = Layout
@@ -63,13 +64,20 @@ const InfoGerencia = () => {
 
             </div >
             <Row justify="space-around">
+
                 <Col md={18}>
                     <Divider orientation="left">Pedidos</Divider>
                     <ListaPedidos listarCentroCostos={listarCentroCostos} listarPedidos={listarPedidos} pedidos={pedidos} />
                 </Col>
+
+
                 <Col md={18}>
                     <Divider orientation="left">Presupuesto actual de los centro de costos</Divider>
                     <ListaCentroCostos cecos={cecos} />
+                </Col>
+                <Col md={18}>
+                    <Divider orientation="left">Materiales</Divider>
+                    <ProductosPorSedesAlmacen />
                 </Col>
             </Row>
         </>

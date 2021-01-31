@@ -1,5 +1,6 @@
 import React from 'react'
 import { Table } from 'antd';
+import { moneyFormat } from '../../utils/moneyFormat';
 
 const ListaCentroCostos = ({ cecos }) => {
 
@@ -47,7 +48,7 @@ const ListaCentroCostos = ({ cecos }) => {
             title: 'presupuesto',
             dataIndex: 'presupuestoCeco',
             key: 'presupuestoCeco',
-            render: text => <p>${text}</p>,
+            render: text => <p>S/ {moneyFormat(text)}</p>,
         }
     ];
 
@@ -55,6 +56,7 @@ const ListaCentroCostos = ({ cecos }) => {
     return (
         <>
             <Table
+                size="small"
                 scroll={{ x: 320 }}
                 bordered columns={columns} rowKey={"idCeco"} dataSource={data} pagination={{ pageSize: 5 }} />
 

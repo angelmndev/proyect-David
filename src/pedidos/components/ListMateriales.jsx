@@ -51,7 +51,19 @@ const ListMateriales = ({ fk_area, fk_sede, presupuesto, idUsuario }) => {
 
     // ----------autocompletado producto---------------
     const cambiarMaterial = async (e) => {
-        message.info('This is a normal message ' + e, 5);
+
+        let stock = ''
+
+        for (let index = 0; index < productos.length; index++) {
+
+            if (productos[index].idProducto === e) {
+                stock = productos[index].descripcion
+
+            }
+
+        }
+
+        message.info('cantidad existente es ' + stock);
     }
 
 
@@ -87,7 +99,7 @@ const ListMateriales = ({ fk_area, fk_sede, presupuesto, idUsuario }) => {
                                     <Space key={field.key} style={{ display: 'flex', margin: 8 }} align="start">
                                         {/* ------search -----*/}
                                         <Form.Item
-                                            
+
                                             {...field}
                                             label="COD.MATERIAL"
                                             labelCol={24}
@@ -127,7 +139,7 @@ const ListMateriales = ({ fk_area, fk_sede, presupuesto, idUsuario }) => {
                                         <Form.Item
                                             {...field}
                                             label="CANTIDAD"
-                                            
+
                                             name={[field.name, 'cantidadProducto']}
                                             fieldKey={[field.fieldKey, 'cantidadProducto']}
                                             rules={[{ required: true, message: 'cantidad' }]}

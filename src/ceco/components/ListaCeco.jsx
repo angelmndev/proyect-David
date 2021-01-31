@@ -3,6 +3,7 @@ import { Space, Popconfirm, Table } from 'antd';
 import { FormOutlined, DeleteOutlined, DollarCircleOutlined } from '@ant-design/icons'
 import EditPresupuesto from './EditPresupuesto'
 import { GetCeco } from '../services/cecosApi'
+import { moneyFormat } from '../../utils/moneyFormat'
 const ListaCeco = ({ cecos, editarCeco, deleteCeco, obtenerCecos }) => {
 
     //state modal
@@ -65,7 +66,7 @@ const ListaCeco = ({ cecos, editarCeco, deleteCeco, obtenerCecos }) => {
             title: 'presupuesto',
             dataIndex: 'presupuestoCeco',
             key: 'presupuestoCeco',
-            render: text => <p>${text}</p>,
+            render: text => <p>S/ {moneyFormat(text)}</p>,
         },
         {
             title: 'Acciones',

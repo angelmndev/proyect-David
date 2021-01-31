@@ -1,9 +1,8 @@
 import React, { useRef, useState } from 'react'
-import { Table, Input, Space, Button, Badge } from 'antd'
+import { Table, Input, Space, Button, Badge, Card, Tooltip } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 import Highlighter from 'react-highlight-words';
-import 'moment/locale/es';
-
+import { CSVLink } from "react-csv";
 
 const KardexAlmacen = ({ listaKardex }) => {
 
@@ -28,6 +27,7 @@ const KardexAlmacen = ({ listaKardex }) => {
         clearFilters();
         setState({ searchText: '' });
     };
+
     //filters metodos
     const getColumnSearchProps = dataIndex => ({
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
@@ -81,18 +81,15 @@ const KardexAlmacen = ({ listaKardex }) => {
                 ),
     });
 
-
-
     //data de kardex 
     const data = [];
 
     listaKardex.map((kardex, index) =>
         data.push({
             orden: index + 1,
-            id: kardex.idKardexDetalle,
             fecha: kardex.fecha,
             sede: kardex.nombreSede,
-            codigoInventario: kardex.codigoInventario,
+            tipoAlmacen: kardex.abr,
             descripcion: kardex.descripcionMovimientoKardex,
             producto: kardex.nombreProducto,
             estado: kardex.movimientoKardex,
@@ -100,8 +97,6 @@ const KardexAlmacen = ({ listaKardex }) => {
             cantidadIngreso: kardex.ingresos,
             cantidadRetirada: kardex.salidas,
             cantidadTotal: kardex.total,
-            costo: kardex.costo,
-
 
         })
     );
@@ -111,14 +106,13 @@ const KardexAlmacen = ({ listaKardex }) => {
             title: 'Orden',
             dataIndex: 'orden',
             key: 'orden',
-
+            width: 60
 
         },
         {
             title: 'Fecha',
             dataIndex: 'fecha',
             key: 'fecha',
-            width: 100,
             ...getColumnSearchProps('fecha')
         },
         {
@@ -129,9 +123,9 @@ const KardexAlmacen = ({ listaKardex }) => {
 
         },
         {
-            title: 'Codigo Inventario',
-            dataIndex: 'codigoInventario',
-            key: 'codigoInventario',
+            title: 'Almacen',
+            dataIndex: 'tipoAlmacen',
+            key: 'tipoAlmacen',
 
 
         },
@@ -139,8 +133,17 @@ const KardexAlmacen = ({ listaKardex }) => {
             title: 'Descripcion Documento',
             dataIndex: 'descripcion',
             key: 'descripcion',
+            ellipsis: {
+                showTitle: false,
+            },
             ...getColumnSearchProps('descripcion'),
-            width: 400
+            render: descripcion => (
+                <Tooltip placement="topLeft" title={descripcion}>
+                    {descripcion}
+                </Tooltip>
+            ),
+            width: '20%'
+
         }
         ,
         {
@@ -148,7 +151,15 @@ const KardexAlmacen = ({ listaKardex }) => {
             dataIndex: 'producto',
             key: 'producto',
             width: 100,
-            ...getColumnSearchProps('producto')
+            ellipsis: {
+                showTitle: false,
+            },
+            ...getColumnSearchProps('producto'),
+            render: producto => (
+                <Tooltip placement="topLeft" title={producto}>
+                    {producto}
+                </Tooltip>
+            ),
         },
         {
             title: 'Estado',
@@ -179,17 +190,32 @@ const KardexAlmacen = ({ listaKardex }) => {
             dataIndex: 'cantidadTotal',
             key: 'cantidadTotal',
             fixed: 'right',
-
-
-
-            render: text => <Badge count={text} style={{ backgroundColor: '#5D3C81' }} overflowCount={1000} />,
+            render: cantidadTotal => {
+                if (cantidadTotal === 0) {
+                    return <Badge showZero count={cantidadTotal} style={{ backgroundColor: 'red' }} overflowCount={1000} />
+                } else {
+                    return <Badge showZero count={cantidadTotal} style={{ backgroundColor: '#5D3C81' }} overflowCount={1000} />
+                }
+            },
         },
     ]
 
 
-    return (
-        <Table scroll={{ x: 1400 }} size="small" bordered columns={columns} rowKey={"id"} dataSource={data} pagination={{ pageSize: 5 }} />
 
+    return (
+        <>
+            <Table id="kardex" size="small" bordered columns={columns} rowKey={"id"} dataSource={data} pagination={{ pageSize: 10 }} />
+            <Card style={{ width: 200, textAlign: 'center' }}>
+                <CSVLink data={data}
+                    filename="kardex.csv"
+                >
+                    exportar kardex
+                 </CSVLink>
+            </Card>
+            <br />
+
+
+        </>
     )
 }
 

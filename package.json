@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "homepage": "http://logistica.demo.devs-space.com",
+  "homepage": "http://logistica.devs-space.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,17 +10,22 @@
     "@testing-library/user-event": "^7.2.1",
     "antd": "^4.5.4",
     "craco-less": "^1.17.0",
+    "export-from-json": "^1.3.4",
     "react": "^16.13.1",
+    "react-csv": "^2.0.3",
     "react-dom": "^16.13.1",
     "react-excel-renderer": "^1.1.0",
+    "react-export-excel": "^0.5.3",
     "react-highlight-words": "^0.16.0",
+    "react-html-table-to-excel": "^2.0.0",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
-    "reqwest": "^2.0.5"
+    "reqwest": "^2.0.5",
+    "xlsx": "^0.16.8"
   },
   "scripts": {
     "start": "craco start",

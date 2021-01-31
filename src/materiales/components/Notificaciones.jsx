@@ -13,7 +13,7 @@ export const openNotificationSuccess = (type = "success", placement = 'bottomLef
 
 export const openNotificationDelete = (placement = 'bottomLeft') => {
     notification.open({
-        message: 'El área establecida ha sido eliminada',
+        message: 'El material ha sido eliminada',
         placement
     });
 };

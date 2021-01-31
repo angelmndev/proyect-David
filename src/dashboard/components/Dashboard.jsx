@@ -17,7 +17,6 @@ import Roles from '../../rol/containers/RolContainers'
 import Materiales from '../../materiales/containers/MaterialesContainer';
 import Cecos from '../../ceco/containers/CecoContainer';
 import Pedidos from '../../pedidosUsuarios/containers/ContainerPedidosUsuarios'
-import Inventario from '../../inventario/containers/InventarioContainer'
 import Almacen from '../../almacen/containers/ContainerAlmacen'
 
 const Dashboard = () => {
@@ -45,7 +44,6 @@ const Dashboard = () => {
                         <Route exact path={`${path}/materiales`} component={Materiales} />
                         <Route exact path={`${path}/cecos`} component={Cecos} />
                         <Route exact path={`${path}/pedidos`} component={Pedidos} />
-                        <Route exact path={`${path}/inventario`} component={Inventario} />
                         <Route exact path={`${path}/almacen`} component={Almacen} />
 
                         <Route exact path={`/requerimientos`} >

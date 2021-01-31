@@ -57,13 +57,14 @@ const CecoContainer = () => {
                 </Descriptions.Item>
             </Descriptions>
 
-            <Tabs type="card">
-                <TabPane tab="Registrar CECO" key="1">
-                    <NewCeco obtenerCecos={obtenerCecos} />
-                </TabPane>
-                <TabPane tab="CECOS registrados" key="2">
+            <Tabs type="card" defaultActiveKey="1">
+                <TabPane tab="CECOS registrados" key="1">
                     <ListaCeco obtenerCecos={obtenerCecos} cecos={cecos} editarCeco={editarCeco} deleteCeco={deleteCeco} />
                 </TabPane>
+                <TabPane tab="Registrar CECO" key="2">
+                    <NewCeco obtenerCecos={obtenerCecos} />
+                </TabPane>
+
             </Tabs>
             {
                 visible.value && <ModalCecos idCeco={idCeco} visible={visible.value} setVisible={setVisible} obtenerCecos={obtenerCecos} />

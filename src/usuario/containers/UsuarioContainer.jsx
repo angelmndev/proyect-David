@@ -30,7 +30,9 @@ const UsuarioContainer = () => {
 
     const listarUsuarios = async () => {
         const data = await getUsuariosApi();
-        setUsuarios(data);
+        const filtrodeUser = await data.filter(user => user.nombreUsuario !== 'root@o' && user.nombreUsuario !== 'root@g' && user.nombreUsuario !== 'root@u')
+        console.log(filtrodeUser);
+        setUsuarios(filtrodeUser);
     }
 
     useEffect(() => {
@@ -65,13 +67,14 @@ const UsuarioContainer = () => {
             {/* component description */}
             <Row>
                 <Col md={24}>
-                    <Tabs type="card">
-                        <TabPane tab="Registrar usuario" key="1">
-                            <NewUsuario listarUsuarios={listarUsuarios} />
-                        </TabPane>
-                        <TabPane tab="usuarios registrados" key="2">
+                    <Tabs type="card" defaultActiveKey="1">
+                        <TabPane tab="usuarios registrados" key="1">
                             <ListUsuarios usuarios={usuarios} setEditModalUsuario={setEditModalUsuario} deleteUsuarioId={deleteUsuarioId} />
                         </TabPane>
+                        <TabPane tab="Registrar usuario" key="2">
+                            <NewUsuario listarUsuarios={listarUsuarios} />
+                        </TabPane>
+
                     </Tabs>
 
                 </Col>

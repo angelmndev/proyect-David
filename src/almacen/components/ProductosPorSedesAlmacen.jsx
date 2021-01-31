@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Select, Card, Col, Row, Button, Space, Spin } from 'antd';
+import { Select, Card, Col, Row, Button, Spin } from 'antd';
 
 //APIS
 import { getSedes } from '../../sedes/services/sedesApi'
@@ -30,7 +30,7 @@ const ProductosPorSedesAlmacen = () => {
     }, [])
 
     const handleChangeSede = async (value) => {
-        console.log(`selected sede id: ${value}`);
+        // console.log(`selected sede id: ${value}`);
         const { almacenes } = await obtenerAlmacenPorSede(value);
         setAlmacenes(almacenes)
 
@@ -41,7 +41,7 @@ const ProductosPorSedesAlmacen = () => {
     }
 
     const handleChangeAlmacen = (value) => {
-        console.log(`selected almacen id:${value}`);
+        // console.log(`selected almacen id:${value}`);
 
         if (value === 'TODOS') {
 
@@ -74,47 +74,47 @@ const ProductosPorSedesAlmacen = () => {
     return (
         <>
             <Card>
-                <Row justify="center">
-                    <Space>
-                        <Col>
+                <Row justify="center" gutter={[16, 8]}>
 
-                            <Select
-                                placeholder="ESCOGE LA SEDE"
-                                style={{ width: 200 }}
-                                onChange={handleChangeSede}
+                    <Col xs={22} md={4}>
 
-                            >
+                        <Select
+                            placeholder="ESCOGE LA SEDE"
+                            style={{ width: '100%' }}
+                            onChange={handleChangeSede}
 
-                                {
-                                    sedes.map((item) => (
-                                        <Option key={item.idSede} value={item.idSede}>{item.nombreSede}</Option>
-                                    ))
-                                }
+                        >
 
-                            </Select>
-                        </Col>
-                        <Col>
+                            {
+                                sedes.map((item) => (
+                                    <Option key={item.idSede} value={item.idSede}>{item.nombreSede}</Option>
+                                ))
+                            }
 
-                            <Select
-                                placeholder="ESCOGE EL ALMACEN"
-                                style={{ width: 300 }}
-                                onChange={handleChangeAlmacen}
+                        </Select>
+                    </Col>
+                    <Col xs={22} md={8}>
 
-                            >
-                                <Option value="TODOS">TODOS</Option>
-                                {
+                        <Select
+                            placeholder="ESCOGE EL ALMACEN"
+                            style={{ width: '100%' }}
+                            onChange={handleChangeAlmacen}
 
-                                    almacenes.map((item) => (
-                                        <Option key={item.codigoInventario} value={item.codigoInventario}>{item.nombreInventario}</Option>
-                                    ))
-                                }
+                        >
+                            <Option value="TODOS">TODOS</Option>
+                            {
 
-                            </Select>
-                        </Col>
-                        <Col>
-                            <Button onClick={filtrarProductos} type="primary" block>Filtrar</Button>
-                        </Col>
-                    </Space>
+                                almacenes.map((item) => (
+                                    <Option key={item.codigoInventario} value={item.codigoInventario}>{item.nombreInventario}</Option>
+                                ))
+                            }
+
+                        </Select>
+                    </Col>
+                    <Col xs={22} md={6}>
+                        <Button onClick={filtrarProductos} type="primary" block>Filtrar</Button>
+                    </Col>
+
                 </Row>
 
             </Card>

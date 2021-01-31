@@ -1,5 +1,5 @@
 // const API_URL = 'http://localhost:5000/roles';
-const API_URL = 'http://64.227.9.165:5000/roles';
+const API_URL = `${process.env.REACT_APP_API_URL}/roles`;
 
 
 export const getRolesApi = async () => {

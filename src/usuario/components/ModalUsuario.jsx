@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Drawer, Button, Col, Row, Input, Select } from 'antd';
-import { EyeTwoTone, EyeInvisibleOutlined } from '@ant-design/icons'
 import { getUsuarioIdApi, updateUsuarioApi } from '../services/usuarioApi'
 import { getRolesApi } from '../../rol/services/rolApi'
 
@@ -116,29 +115,14 @@ const ModalUsuarios = ({ listarUsuarios, visible, setVisible, idUsuario }) => {
                         <Input onChange={handleChange} value={usuarioAeditar.apellidoPersonalUsuario} name="apellidoPersonalUsuario" placeholder="Licla Carpio" />
                     </Col>
                 </Row>
+
                 <Row gutter={16} style={{ marginBottom: '1em' }}>
                     <Col span={24}>
-                        <p>Seleccione la sede, el fundo y area en la cual es responsable el trabajador</p>
-
-                    </Col>
-
-                </Row>
-                <Row gutter={16} style={{ marginBottom: '1em' }}>
-                    <Col span={12}>
                         <p>Nombre de usuario</p>
-                        <Input onChange={handleChange} value={usuarioAeditar.nombreUsuario} name="nombreUsuario" placeholder="442379" />
+                        <Input maxLength={6} onChange={handleChange} value={usuarioAeditar.nombreUsuario} name="nombreUsuario" placeholder="442379" />
 
                     </Col>
-                    <Col span={12}>
-                        <p>Contraseña de usuario</p>
-                        <Input.Password
-                            onChange={handleChange}
-                            value={usuarioAeditar.claveUsuario}
-                            name="claveUsuario"
-                            placeholder="input password"
-                            iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                        />
-                    </Col>
+
                 </Row>
                 <Row gutter={16} style={{ marginBottom: '1em' }}>
                     <Col span={24}>

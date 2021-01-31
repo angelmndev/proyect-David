@@ -82,17 +82,17 @@ export default class Excel extends Component {
         if (!isExcel) {
             errorMessage = "You can only upload Excel file!";
         }
-        console.log("file", file[0].type);
+        // console.log("file", file[0].type);
         const isLt2M = file[0].size / 1024 / 1024 < 2;
         if (!isLt2M) {
             errorMessage = "File must be smaller than 2MB!";
         }
-        console.log("errorMessage", errorMessage);
+        // console.log("errorMessage", errorMessage);
         return errorMessage;
     }
 
     fileHandler = fileList => {
-        console.log("fileList", fileList);
+        // console.log("fileList", fileList);
         let fileObj = fileList;
         if (!fileObj) {
             this.setState({
@@ -100,7 +100,7 @@ export default class Excel extends Component {
             });
             return false;
         }
-        console.log("fileObj.type:", fileObj.type);
+        // console.log("fileObj.type:", fileObj.type);
         if (
             !(
                 fileObj.type === "application/vnd.ms-excel" ||

@@ -24,7 +24,7 @@ const Navbar = () => {
     }
 
     const menu = (
-        <Menu>
+        <Menu >
             <Menu.Item key="0" disabled>
                 <button className="boton_navbar_r"  >Configuración</button>
             </Menu.Item>
@@ -43,13 +43,13 @@ const Navbar = () => {
 
     return (
         <Affix offsetTop={0}>
-            <Header className="header__navbar" style={{ width: '100%' }}>
+            <Header className="header__navbar" style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
                 <div className="title__navbar">
                     <h2 className="title__dashboard"><PieChartOutlined /> Vista general</h2>
                 </div>
                 <div className="avatar__navbar">
                     <Dropdown overlay={menu} trigger={['click']}>
-                        <button className="boton_navbar_r" onClick={e => e.preventDefault()}>
+                        <button style={{ background: 'none', border: 'none' }} className="boton_navbar_r" onClick={e => e.preventDefault()}>
                             <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
                         </button>
                     </Dropdown>

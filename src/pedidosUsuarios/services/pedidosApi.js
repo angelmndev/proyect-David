@@ -82,3 +82,24 @@ export const rechazarPedidoAPI = async (id) => {
     const pedidos = await response.json();
     return pedidos;
 }
+
+export const exportarExcelApi = async (id) => {
+    const config = {
+        method: 'GET'
+    }
+
+    const response = await fetch(`${API_URL}/exportar/${id}`, config);
+    const pedidos = await response.json();
+    return pedidos;
+}
+
+
+export const deletePedidoId = async (id) => {
+    const config = {
+        method: "DELETE"
+    };
+
+    const responseApi = await fetch(`${API_URL}/deletePedido/${id}`, config);
+    const response = await responseApi.json();
+    return response;
+}

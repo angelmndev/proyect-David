@@ -5,7 +5,7 @@ import ListProductos from '../components/ListProductos';
 import { listarProductosAPI, deleteProductoAPI } from '../services/materialesApi'
 import { openNotificationDelete } from '../components/Notificaciones'
 import ModalProductos from '../components/ModalProductos'
-import RegistroMasivo from '../components/RegistroMasivo'
+// import RegistroMasivo from '../components/RegistroMasivo'
 
 const MaterialesContainer = () => {
     const { TabPane } = Tabs;
@@ -31,6 +31,7 @@ const MaterialesContainer = () => {
     }, [])
 
     const deleteProducto = async (id) => {
+        console.log(id);
         const { success } = await deleteProductoAPI(id);
         if (success) {
             obtenerProductos();
@@ -41,9 +42,9 @@ const MaterialesContainer = () => {
     return (
         <>
             {/* component description */}
-            <Descriptions title="Nuestros Materiales" >
+            <Descriptions title="Nuestros Materiales Registrados" >
                 <Descriptions.Item >
-                    Bienvenido a la sección materiales.
+                    Bienvenido a la sección materiales aqui registrarás nuevos materiales en la base de datos.
             </Descriptions.Item>
                 <Descriptions.Item >
                     <p style={{ marginRight: '1em' }}> Aqui podras hacer las siguientes operaciones:</p>
@@ -55,15 +56,13 @@ const MaterialesContainer = () => {
                 </Descriptions.Item>
             </Descriptions>
 
-            <Tabs type="card">
-                <TabPane tab="Registrar Producto" key="1">
-                    <NewProducto listarProductos={obtenerProductos} />
-                </TabPane>
-                <TabPane tab="Productos registrados" key="2">
+            <Tabs type="card" defaultActiveKey="1">
+
+                <TabPane tab="Productos registrados" key="1" >
                     <ListProductos productos={productos} editarProducto={editarProducto} deleteProducto={deleteProducto} />
                 </TabPane>
-                <TabPane tab="Registro de productos masivos" key="3">
-                    <RegistroMasivo />
+                <TabPane tab="Registrar Producto" key="2">
+                    <NewProducto listarProductos={obtenerProductos} />
                 </TabPane>
             </Tabs>
             {

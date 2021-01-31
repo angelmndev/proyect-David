@@ -7,16 +7,19 @@ const ContainerPedidosUsuarios = () => {
 
     const [pedidos, setPedidos] = useState([])
 
+    const listarPedidos = async () => {
+        const data = await ListPedidosAPI();
+        setPedidos(data);
+    }
     useEffect(() => {
-        ListPedidosAPI()
-            .then(data => setPedidos(data))
+        listarPedidos()
 
     }, [])
 
     return (
         <>
             <PanelHeader />
-            <ListPedidos pedidos={pedidos} />
+            <ListPedidos pedidos={pedidos} listarPedidos={listarPedidos} />
 
         </>
     )

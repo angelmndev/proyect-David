@@ -54,7 +54,8 @@ const ListaPedidos = ({ pedidos, listarPedidos, listarCentroCostos }) => {
             ceco: pedido.nombreCeco,
             sede: pedido.nombreSede,
             idPedido: pedido.idPedido,
-            idCeco: pedido.idCeco
+            idCeco: pedido.idCeco,
+            maquinas: pedido.maquinaDestino
 
         })
     ))
@@ -107,6 +108,11 @@ const ListaPedidos = ({ pedidos, listarPedidos, listarCentroCostos }) => {
             title: 'sede',
             key: 'sede',
             dataIndex: 'sede',
+        },
+        {
+            title: 'Maquina destino ',
+            key: 'maquinas',
+            dataIndex: 'maquinas',
         },
         {
             title: 'Action',

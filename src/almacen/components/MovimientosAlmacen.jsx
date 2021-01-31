@@ -6,7 +6,7 @@ import DetalleMovimiento from './DetalleMovimiento'
 import { useState } from 'react';
 import { obtenerMovimientosDetalles } from '../services/AlmacenAPI'
 
-const MovimientosAlmacen = ({ listaMovimientos,ListarKardex }) => {
+const MovimientosAlmacen = ({ listaMovimientos, ListarKardex }) => {
     const data = [];
 
     listaMovimientos.map((movimiento, index) =>
@@ -17,7 +17,8 @@ const MovimientosAlmacen = ({ listaMovimientos,ListarKardex }) => {
             fecha: movimiento.fecha,
             sede: movimiento.nombreSede,
             documento: movimiento.codigoDocumento,
-            responsable: movimiento.personaResponsable
+            responsable: movimiento.personaResponsable,
+            uso: movimiento.uso
 
         })
     );
@@ -76,6 +77,13 @@ const MovimientosAlmacen = ({ listaMovimientos,ListarKardex }) => {
             render: responsable => <p>{responsable}</p>,
         },
         {
+            title: 'Uso',
+            dataIndex: 'uso',
+            key: 'uso',
+            width: 60,
+            render: uso => <p>{uso}</p>,
+        },
+        {
             title: 'Action',
             dataIndex: 'idMovimiento',
             key: 'idMovimiento',
@@ -91,14 +99,14 @@ const MovimientosAlmacen = ({ listaMovimientos,ListarKardex }) => {
 
     return (
         <>
-            <Table size="small" bordered columns={columns} rowKey={"idMovimiento"} dataSource={data} pagination={{ pageSize: 5 }} />
+            <Table size="small" bordered columns={columns} rowKey={"idMovimiento"} dataSource={data} pagination={{ pageSize: 10 }} />
             {
                 viewDetalle && <DetalleMovimiento
-               
-                ListarKardex={ListarKardex}
-                setViewDetalle={setViewDetalle} 
-                movimientosDetalles={movimientosDetalles} 
-                visible={viewDetalle} />
+
+                    ListarKardex={ListarKardex}
+                    setViewDetalle={setViewDetalle}
+                    movimientosDetalles={movimientosDetalles}
+                    visible={viewDetalle} />
             }
         </>
     )

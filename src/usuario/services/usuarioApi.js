@@ -39,7 +39,7 @@ export const getUsuarioIdApi = async (idUsuario) => {
 
 
 export const updateUsuarioApi = async (idUsuario, usuario) => {
-    console.log(usuario);
+
     const config = {
         method: "PUT",
         headers: { 'Content-Type': 'application/json' },
@@ -58,6 +58,20 @@ export const deleteUsuarioApi = async (idUsuario) => {
     };
 
     const responseApi = await fetch(`${API_URL}/${idUsuario}`, config);
+    const response = await responseApi.json();
+    return response;
+}
+
+
+export const changePasswordApi = async (idUsuario, password) => {
+
+    const config = {
+        method: "PUT",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password })
+    };
+
+    const responseApi = await fetch(`${API_URL}/changePassword/${idUsuario}`, config);
     const response = await responseApi.json();
     return response;
 }

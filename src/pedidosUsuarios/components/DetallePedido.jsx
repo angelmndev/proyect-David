@@ -1,14 +1,16 @@
 import React from 'react'
-import { PageHeader, Table } from 'antd'
+import { PageHeader, Table, Typography } from 'antd'
 
 const DetallePedido = ({ pedidoEscogido, setDetalle }) => {
-
+    const { Text } = Typography
     const data = []
     pedidoEscogido.map((pedido, index) => (
         data.push({
             orden: index + 1,
             producto: pedido.nombreProducto,
+            sku: pedido.skuProducto,
             cantidad: pedido.cantidadPedido,
+            unidad: pedido.unidad,
             precio: pedido.precioReferencialProducto,
             total: pedido.total,
             area: pedido.nombreArea,
@@ -23,7 +25,12 @@ const DetallePedido = ({ pedidoEscogido, setDetalle }) => {
             key: 'orden',
         },
         {
-            title: 'producto',
+            title: 'Codigo material',
+            dataIndex: 'sku',
+            key: 'sku',
+        },
+        {
+            title: 'Material',
             dataIndex: 'producto',
             key: 'producto',
         },
@@ -33,16 +40,21 @@ const DetallePedido = ({ pedidoEscogido, setDetalle }) => {
             key: 'cantidad',
         },
         {
+            title: 'unidad',
+            dataIndex: 'unidad',
+            key: 'unidad',
+        },
+        {
             title: 'precio',
             dataIndex: 'precio',
             key: 'precio',
-            render: (precio) => (<p>$ {precio}</p>)
+            render: (precio) => (<p>S/ {precio}</p>)
         },
         {
             title: 'total',
             dataIndex: 'total',
             key: 'total',
-            render: (total) => (<p>$ {total}</p>)
+            render: (total) => (<p>S/ {total}</p>)
         },
         {
             title: 'area',
@@ -65,7 +77,39 @@ const DetallePedido = ({ pedidoEscogido, setDetalle }) => {
                 title="Regresar"
                 subTitle="volver a la lista de pedidos"
             />
-            <Table dataSource={data} columns={columns} />
+            <Table
+                size="small"
+                rowKey="idDetalle_pedido"
+                dataSource={data}
+                columns={columns}
+                summary={pageData => {
+                    let montoFinal = 0;
+
+                    pageData.forEach(({ total }) => {
+                        montoFinal += total;
+
+                        ;
+                    });
+
+                    return (
+                        <>
+                            <Table.Summary.Row>
+                                <Table.Summary.Cell></Table.Summary.Cell>
+                                <Table.Summary.Cell></Table.Summary.Cell>
+                                <Table.Summary.Cell></Table.Summary.Cell>
+                                <Table.Summary.Cell></Table.Summary.Cell>
+                                <Table.Summary.Cell></Table.Summary.Cell>
+                                <Table.Summary.Cell>Total</Table.Summary.Cell>
+                                <Table.Summary.Cell>
+                                    <Text type="danger">S/ {montoFinal}</Text>
+                                </Table.Summary.Cell>
+                                <Table.Summary.Cell></Table.Summary.Cell>
+                            </Table.Summary.Row>
+
+                        </>
+                    );
+                }}
+            />
         </>
 
     )

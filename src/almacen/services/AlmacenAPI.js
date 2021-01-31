@@ -11,7 +11,17 @@ export const obtenerAlmacenPorSede = async (fk_sede) => {
 }
 
 
-export const obtenerMaterialesPorAlmacen = async (idSede) => {
+export const obtenerMaterialesPorAlmacen = async (codigoAlmacen) => {
+    const config = {
+        method: 'GET'
+    }
+
+    const response = await fetch(`${API_URL}/materialPorAlmacen/${codigoAlmacen}`, config)
+    const inventario = await response.json();
+    return inventario;
+}
+
+export const obtenerMaterialesPorSede = async (idSede) => {
     const config = {
         method: 'GET'
     }
@@ -32,19 +42,13 @@ export const getMaterialbyStock = async (idAlmacen) => {
     return inventario;
 }
 
-export const registrarInicializacionAlmacen = async ({ fecha, fk_sede, fk_inventario, materiales }) => {
-
+export const registrarInicializacionAlmacen = async (ingreso) => {
+    
     const config = {
 
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            fecha: fecha,
-            fk_sede,
-            fk_inventario,
-            materiales
-
-        })
+        body: JSON.stringify(ingreso)
     };
 
     const responseApi = await fetch(API_URL, config);
@@ -182,4 +186,43 @@ export const listarProductosSedesAlmacen = async (filtro) => {
         const inventario = await response.json();
         return inventario;
     }
+}
+
+
+//filtrar productos por fecha y material
+
+export const FiltrarProductoEscogido = async ({ fechaInicio, fechaFin, material }) => {
+    const config = {
+        method: 'GET'
+    }
+
+    const responseApi = await fetch(`${API_URL}/kardex/${material}/${fechaInicio}/${fechaFin}`, config)
+    const response = await responseApi.json()
+    return response
+
+}
+export const filtrarKardexPorFecha = async (fechaInicio, fechaFin) => {
+    const config = {
+        method: 'GET'
+    }
+
+    const responseApi = await fetch(`${API_URL}/kardex/${fechaInicio}/${fechaFin}`, config)
+    const response = await responseApi.json()
+    return response
+
+}
+
+
+export const actualizarStockAlmacenGeneral = async (materiales) => {
+
+    const config = {
+
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(materiales)
+    };
+
+    const responseApi = await fetch(`${API_URL}/actualizarStock/almacenGeneral`, config);
+    const response = await responseApi.json();
+    return response;
 }

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Input, Row, Col, Button, Select } from 'antd'
+
+
 //api
 import { getRolesApi } from '../../rol/services/rolApi'
 import { createUsuarioApi } from '../services/usuarioApi'
@@ -59,13 +61,14 @@ const NewUsuario = ({ listarUsuarios }) => {
                 </Col>
                 <Col md={10}>
                     <Form.Item
+                        extra="El nombre de usuario solo puede ser de 6 caracteres."
                         name="nombreUsuario"
                         label="nombre de usuario"
                         labelCol={{ span: 24 }}
                         wrapperCol={{ span: 24 }}
                         rules={[{ required: true, message: 'ingresa el nombre de usuario' }]}
                     >
-                        <Input />
+                        <Input maxLength={6} />
                     </Form.Item>
                 </Col>
                 <Col md={10}>

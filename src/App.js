@@ -19,7 +19,7 @@ const App = () => {
           <PublicRoutes exact path="/login" component={LoginLogistica} />
           <ProtectedRoutes path="/dashboard" />
           <ProtectedRoutes exact path="/gerente" />
-          <ProtectedRoutes exact path="/requerimientos" />
+          <ProtectedRoutes path="/requerimientos" />
         </Switch>
       </Router>
     </Provider>
