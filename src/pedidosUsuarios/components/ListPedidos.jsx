@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Table, Tag } from 'antd';
 import { Space, Popconfirm } from 'antd';
 import { SearchOutlined, DeleteOutlined } from '@ant-design/icons'
@@ -22,7 +22,7 @@ const ListPedidos = ({ pedidos, listarPedidos }) => {
             pedidos: pedidos
         })
 
-
+    
         if (pedidosExport.length > 0) {
             const fileName = 'download'
             const exportType = 'xls'
@@ -30,15 +30,16 @@ const ListPedidos = ({ pedidos, listarPedidos }) => {
             exportFromJSON({ pedidosExport, fileName, exportType })
         }
 
-    }
+    }  
 
-
+  
     const exportarExcel = async (idPedido) => {
         const { pedidos } = await exportarExcelApi(idPedido)
-        console.log(pedidos);
+        console.log(pedidos);        
         setPedidosExport(pedidos)
         return false
     }
+
 
     const deletePedido = async (idPedido) => {
         console.log(idPedido);
@@ -47,6 +48,8 @@ const ListPedidos = ({ pedidos, listarPedidos }) => {
             listarPedidos()
         }
     }
+
+    
 
     pedidos.map((pedido, index) => (
         listaPedidos.push({
@@ -58,10 +61,8 @@ const ListPedidos = ({ pedidos, listarPedidos }) => {
             sede: pedido.nombreSede,
             idPedido: pedido.idPedido,
             maquinas: pedido.maquinaDestino
-
         })
     ))
-
 
 
     const columns = [
@@ -118,11 +119,11 @@ const ListPedidos = ({ pedidos, listarPedidos }) => {
         },
         {
             title: 'Acciones',
-            dataIndex: 'idPedido',
+            dataIndex: "idPedido",
             key: 'idPedido',
-
-            render: (idPedido) => (
-
+            
+            render:(idPedido,row) => (
+                
                 <Space size="middle">
 
                     <Popconfirm title="¿Deseas ver los detalles del pedido?"
@@ -132,13 +133,13 @@ const ListPedidos = ({ pedidos, listarPedidos }) => {
                         <SearchOutlined />
                     </Popconfirm>
 
-
-
-                    <CSVLink
+                    
+                    <CSVLink                                        
                         data={pedidosExport}
-                        filename={'reporte-pedidos.csv'}
-                        asyncOnClick={true}
-                        onClick={() => exportarExcel(idPedido)}
+                        //editando el nombre de archivo                        
+                        filename={row.usuario+"_"+row.fecha+".csv"}
+                        asyncOnClick={true}                                             
+                        onClick={() =>exportarExcel(idPedido)}                        
                     >
                         Descargar
                     </CSVLink>
