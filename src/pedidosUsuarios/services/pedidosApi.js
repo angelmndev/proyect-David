@@ -9,6 +9,7 @@ export const ListPedidosAPI = async () => {
 
     const response = await fetch(API_URL, config);
     const pedidos = await response.json();
+    
     return pedidos;
 }
 

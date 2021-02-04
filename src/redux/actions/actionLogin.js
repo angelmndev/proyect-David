@@ -8,7 +8,7 @@ export const sessionLoginAction = (nombreUsuario, claveUsuario) => async dispatc
 
     if (responseService) {
         dispatch({ type: LOGIN, success: responseService })
-        dispatch(verificarUsuarioAction)
+        dispatch(verificarUsuarioAction)        
     }
 
 

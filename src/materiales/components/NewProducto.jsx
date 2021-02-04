@@ -6,7 +6,7 @@ import { getAreas } from '../../area/services/areaApi'
 import { ListCecos } from '../../ceco/services/cecosApi'
 import { getCategoriasProductosAPI } from '../../categoriaProducto/services/categoriaProductosApi'
 
-const NewProducto = ({ listarProductos }) => {
+const NewProducto = ({ listarProductos ,productos}) => {
     const { Option } = Select;
     const [form] = Form.useForm();
     const [areas, guardarArea] = useState([]);
@@ -15,6 +15,7 @@ const NewProducto = ({ listarProductos }) => {
 
 
     const registrarProducto = async (values) => {
+        console.log(values);        
         const { success } = await agregarNuevoProductoAPI(values)
 
         if (success) {
@@ -24,7 +25,10 @@ const NewProducto = ({ listarProductos }) => {
         }
     }
 
-    useEffect(() => {
+
+
+ 
+    useEffect(() => {        
         getAreas()
             .then(areas => guardarArea(areas))
 
@@ -41,21 +45,20 @@ const NewProducto = ({ listarProductos }) => {
         <Form onFinish={registrarProducto} form={form}>
             <Row>
                 <Col md={8}>
-                    <Form.Item
-                        name="skuProducto"
-                        label="SKU Material"
+                    <Form.Item                                                                        
+                        name="skuProducto"                        
+                        label="SKU Material"                   
                         labelCol={{ span: 24 }}
                         wrapperCol={{ span: 20 }}
-                        rules={[{ required: true, message: 'Escriba el SKU del material !' }]}>
-                        <Input placeholder="00102414" />
-                    </Form.Item>
-
+                        rules={[{ required: false, message: 'Escriba el SKU del material !' }]}>
+                        <Input  placeholder="00102414" />
+                    </Form.Item>                                
                 </Col>
                 <Col md={8}>
                     <Form.Item
                         name="nombreProducto"
                         label="nombre del material"
-                        labelCol={{ span: 24 }}
+                        labelCol={{ span: 24 }}                        
                         wrapperCol={{ span: 20 }}
                         rules={[{ required: true, message: 'Escriba el nombre del material !' }]}>
                         <Input placeholder="radiador v3" />

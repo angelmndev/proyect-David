@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { PageHeader, Table, Space, Popconfirm, Drawer, Button, InputNumber, Typography } from 'antd'
+import { PageHeader, Table, Space, Popconfirm, Drawer, Button,Tag, InputNumber, Typography } from 'antd'
 import { FormOutlined, DeleteOutlined } from '@ant-design/icons'
 
 import { updateCantidadPedidoEscogidoId, actualizarCantidadAPI, deleteProductoAPI, getDetallesPedidosId } from '../../pedidosUsuarios/services/pedidosApi'
+import { Fragment } from 'react'
 const DetallePedido = ({ idPedido, setViewDetalle }) => {
     const { Text } = Typography
     const [visible, setVisible] = useState(false);
@@ -57,7 +58,8 @@ const DetallePedido = ({ idPedido, setViewDetalle }) => {
 
     const data = []
 
-    listPedidos.map((pedido, index) => (
+
+    listPedidos.map((pedido, index) => (        
         data.push({
             orden: index + 1,
             producto: pedido.nombreProducto,
@@ -69,6 +71,7 @@ const DetallePedido = ({ idPedido, setViewDetalle }) => {
             area: pedido.nombreArea,
             ceco: pedido.nombreCeco,
             idDetalle_pedido: pedido.idDetalle_pedido,
+            almacen: pedido.almacen
         })
     ))
 
@@ -123,6 +126,31 @@ const DetallePedido = ({ idPedido, setViewDetalle }) => {
             key: 'total',
             render: (total) => (<p>S/ {total}</p>)
         },
+
+        {
+            title: 'Almacen',
+            dataIndex: 'almacen',
+            key: 'almacen',
+            render: (almacen) => {
+                               
+                let almacenArray = almacen.split(" ");
+                let cantidadArray = almacenArray[1].split(":");
+                let catidadArrayCastillos = almacenArray[2].split(":");
+                let catidadArrayVid = almacenArray[3].split(":");
+                console.log(cantidadArray);
+
+                return(
+                    <Fragment>
+                        <Tag width="10px" color={parseInt(cantidadArray[1])>0?"green":"red"}>{almacenArray[1]}</Tag>
+                        <Tag color={parseInt(catidadArrayCastillos[1])>0?"green":"red"}>{almacenArray[2]}</Tag>
+                        <Tag color={parseInt(catidadArrayVid[1])>0?"green":"red"}>{almacenArray[3]}</Tag>
+                    </Fragment>
+                    
+                )
+
+            }
+        },
+
         {
             title: 'Action',
             dataIndex: 'idDetalle_pedido',

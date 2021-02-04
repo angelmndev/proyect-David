@@ -137,9 +137,12 @@ const PedidoFirstForm = () => {
     const cambiarCantidadMaterial = value => {
         setMaterial({
             ...material,
-            cantidad: value
+            cantidad: value            
         })
+    
     }
+
+
 
     const selectBuscarPorNombre = async (value) => {
         const { success, producto } = await buscarProdutoApi(value);
@@ -376,7 +379,7 @@ const PedidoFirstForm = () => {
                     <Col xs={22} span={8}>
                         {
                             showCard &&
-                            <CardProducto material={material} cambiarCantidadMaterial={cambiarCantidadMaterial} agregarMaterial={agregarMaterial} />
+                            <CardProducto cantidad={material.cantidad} material={material} cambiarCantidadMaterial={cambiarCantidadMaterial} agregarMaterial={agregarMaterial} />
                         }
                         {
                             showError &&

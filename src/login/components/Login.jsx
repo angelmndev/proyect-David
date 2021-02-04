@@ -17,6 +17,7 @@ const Login = ({ loginUsuario }) => {
     const loginView = (values) => {
         const { nombreUsuario, claveUsuario } = values;
         loginUsuario(nombreUsuario, claveUsuario)
+    
 
     }
     return (
@@ -68,7 +69,8 @@ const Login = ({ loginUsuario }) => {
 
 const mapDispatchToProps = (dispatch) => ({
     loginUsuario: (nombreUsuario, claveUsuario) => {
-        dispatch(sessionLoginAction(nombreUsuario, claveUsuario))
+         dispatch(sessionLoginAction(nombreUsuario, claveUsuario))
+  
     }
 })
 

@@ -29,7 +29,6 @@ const NewUsuario = ({ listarUsuarios }) => {
             listarUsuarios()
             openNotificationSuccess()
             form.resetFields()
-
         }
     }
 

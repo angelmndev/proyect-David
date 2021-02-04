@@ -46,6 +46,7 @@ const ListaPedidos = ({ pedidos, listarPedidos, listarCentroCostos }) => {
 
     const listaPedidos = []
     pedidos.map((pedido, index) => (
+        //console.log(pedido),
         listaPedidos.push({
             orden: index + 1,
             fecha: pedido.fecha,
@@ -56,7 +57,6 @@ const ListaPedidos = ({ pedidos, listarPedidos, listarCentroCostos }) => {
             idPedido: pedido.idPedido,
             idCeco: pedido.idCeco,
             maquinas: pedido.maquinaDestino
-
         })
     ))
 
@@ -114,6 +114,9 @@ const ListaPedidos = ({ pedidos, listarPedidos, listarCentroCostos }) => {
             key: 'maquinas',
             dataIndex: 'maquinas',
         },
+
+       
+
         {
             title: 'Action',
             dataIndex: 'idPedido',

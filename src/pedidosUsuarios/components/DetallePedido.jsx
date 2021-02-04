@@ -4,6 +4,8 @@ import { PageHeader, Table, Typography } from 'antd'
 const DetallePedido = ({ pedidoEscogido, setDetalle }) => {
     const { Text } = Typography
     const data = []
+
+    console.log(pedidoEscogido);
     pedidoEscogido.map((pedido, index) => (
         data.push({
             orden: index + 1,
@@ -14,7 +16,8 @@ const DetallePedido = ({ pedidoEscogido, setDetalle }) => {
             precio: pedido.precioReferencialProducto,
             total: pedido.total,
             area: pedido.nombreArea,
-            ceco: pedido.nombreCeco
+            ceco: pedido.nombreCeco,
+            almacen: pedido.almacen
         })
     ))
 
@@ -65,6 +68,11 @@ const DetallePedido = ({ pedidoEscogido, setDetalle }) => {
             title: 'ceco',
             dataIndex: 'ceco',
             key: 'ceco',
+        },
+        {
+            title: 'almacen',
+            dataIndex: 'almacen',
+            key: 'almacen',
         }
     ];
 

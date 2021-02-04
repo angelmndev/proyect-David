@@ -62,7 +62,7 @@ const MaterialesContainer = () => {
                     <ListProductos productos={productos} editarProducto={editarProducto} deleteProducto={deleteProducto} />
                 </TabPane>
                 <TabPane tab="Registrar Producto" key="2">
-                    <NewProducto listarProductos={obtenerProductos} />
+                    <NewProducto productos={productos} listarProductos={obtenerProductos} />
                 </TabPane>
             </Tabs>
             {

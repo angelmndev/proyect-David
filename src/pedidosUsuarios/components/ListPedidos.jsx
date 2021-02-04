@@ -58,6 +58,7 @@ const ListPedidos = ({ pedidos, listarPedidos }) => {
             estado: pedido.estado,
             usuario: pedido.nombrePersonalUsuario,
             ceco: pedido.nombreCeco,
+            nombreFundo: pedido.nombreFundo,
             sede: pedido.nombreSede,
             idPedido: pedido.idPedido,
             maquinas: pedido.maquinaDestino
@@ -102,9 +103,9 @@ const ListPedidos = ({ pedidos, listarPedidos }) => {
 
         },
         {
-            title: 'ceco',
-            key: 'ceco',
-            dataIndex: 'ceco',
+            title: 'nombreFundo',
+            key: 'nombreFundo',
+            dataIndex: 'nombreFundo',
 
         },
         {
